@@ -1,0 +1,52 @@
+name: Cloudflare Pages Variable Action
+description: Update or get Cloudflare Pages variables
+branding:
+  icon: cloud
+  color: orange
+inputs:
+  method:
+    description: Update or get
+    required: true
+  variable_name:
+    description: Variable name (key)
+    required: true
+  variable_value:
+    description: Variable value
+  project_name:
+    description: Cloudflare Pages project name
+    required: true
+  account_id:
+    description: Cloudflare account ID
+    required: true
+  api_token:
+    description: Cloudflare API token
+    required: true
+outputs:
+  variable_value:
+    description: Variable value
+    value: ${{ steps.get.outputs.value }}
+    
+runs:
+  using: composite
+  steps:
+    - name: Update Cloudflare Pages variable
+      if: inputs.method == 'update'
+      shell: bash
+      run: $GITHUB_ACTION_PATH/update.sh
+      env:
+        variable_name: ${{ inputs.variable_name }}
+        variable_value: ${{ inputs.variable_value }}
+        project_name: ${{ inputs.project_name }}
+        account_id: ${{ inputs.account_id }}
+        api_token: ${{ inputs.api_token }}
+        
+    - name: Get Cloudflare Pages variable
+      id: get
+      if: inputs.method == 'get'
+      shell: bash
+      run: $GITHUB_ACTION_PATH/get.sh
+      env:
+        variable_name: ${{ inputs.variable_name }}
+        project_name: ${{ inputs.project_name }}
+        account_id: ${{ inputs.account_id }}
+        api_token: ${{ inputs.api_token }}
