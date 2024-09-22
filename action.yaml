@@ -32,7 +32,7 @@ runs:
     - name: Update Cloudflare Pages variable
       if: inputs.method == 'update'
       shell: bash
-      run: $GITHUB_ACTION_PATH/update.sh
+      run: $GITHUB_ACTION_PATH/scripts/update.sh
       env:
         variable_name: ${{ inputs.variable_name }}
         variable_value: ${{ inputs.variable_value }}
@@ -44,7 +44,7 @@ runs:
       id: get
       if: inputs.method == 'get'
       shell: bash
-      run: $GITHUB_ACTION_PATH/get.sh
+      run: $GITHUB_ACTION_PATH/scripts/get.sh
       env:
         variable_name: ${{ inputs.variable_name }}
         project_name: ${{ inputs.project_name }}
