@@ -1,0 +1,34 @@
+name: Test Cloudflare-Pages-Variable-Action
+on:
+  push:
+    paths:
+      - action.yaml
+      - scripts/**
+      - .github/workflows/test.yaml
+      
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update variable value using Cloudflare-Pages-Variable-Action
+        uses: AnimMouse/Cloudflare-Pages-Variable-Action@main
+        with:
+          method: update
+          variable_name: ${{ vars.VARIABLE_NAME }}
+          variable_value: ${{ github.run_id }}
+          project_name: ${{ vars.PROJECT_NAME }}
+          account_id: ${{ vars.ACCOUNT_ID }}
+          api_token: ${{ secrets.API_TOKEN }}
+          
+      - name: Get variable value using Cloudflare-Pages-Variable-Action
+        id: variable
+        uses: AnimMouse/Cloudflare-Pages-Variable-Action@main
+        with:
+          method: get
+          variable_name: ${{ vars.VARIABLE_NAME }}
+          project_name: ${{ vars.PROJECT_NAME }}
+          account_id: ${{ vars.ACCOUNT_ID }}
+          api_token: ${{ secrets.API_TOKEN }}
+          
+      - name: Echo current variable value
+        run: echo ${{ steps.variable.outputs.value }}
