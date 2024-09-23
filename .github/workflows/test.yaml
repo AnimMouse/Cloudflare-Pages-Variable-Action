@@ -31,4 +31,4 @@ jobs:
           api_token: ${{ secrets.API_TOKEN }}
           
       - name: Echo current variable value
-        run: echo ${{ steps.variable.outputs.value }}
+        run: echo ${{ steps.variable.outputs.variable_value }}
