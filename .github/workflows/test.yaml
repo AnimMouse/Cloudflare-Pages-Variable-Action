@@ -14,21 +14,21 @@ jobs:
         uses: AnimMouse/Cloudflare-Pages-Variable-Action@main
         with:
           method: update
-          variable_name: ${{ vars.CF_VARIABLE_NAME }}
+          variable_name: ${{ vars.CLOUDFLARE_VARIABLE_NAME }}
           variable_value: ${{ github.run_id }}
-          project_name: ${{ vars.CF_PROJECT_NAME }}
-          account_id: ${{ vars.CF_ACCOUNT_ID }}
-          api_token: ${{ secrets.CF_API_TOKEN }}
+          project_name: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
+          account_id: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           
       - name: Get variable value using Cloudflare-Pages-Variable-Action
         id: variable
         uses: AnimMouse/Cloudflare-Pages-Variable-Action@main
         with:
           method: get
-          variable_name: ${{ vars.CF_VARIABLE_NAME }}
-          project_name: ${{ vars.CF_PROJECT_NAME }}
-          account_id: ${{ vars.CF_ACCOUNT_ID }}
-          api_token: ${{ secrets.CF_API_TOKEN }}
+          variable_name: ${{ vars.CLOUDFLARE_VARIABLE_NAME }}
+          project_name: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
+          account_id: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          api_token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           
       - name: Echo current variable value
         run: echo ${{ steps.variable.outputs.variable_value }}
