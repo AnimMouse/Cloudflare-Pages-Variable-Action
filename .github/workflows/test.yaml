@@ -6,6 +6,9 @@ on:
       - scripts/**
       - .github/workflows/test.yaml
       
+concurrency:
+  group: ${{ github.workflow }}
+  
 jobs:
   test:
     runs-on: ubuntu-latest
