@@ -52,7 +52,7 @@ concurrency:
   
 jobs:
   update:
-    uses: AnimMouse/Cloudflare-Pages-Variable-Action/.github/workflows/update-hugo-cloudflare-pages.yaml@v1
+    uses: AnimMouse/Cloudflare-Pages-Variable-Action/.github/workflows/update-hugo.yaml@v1
     with:
       project_name: ${{ vars.CLOUDFLARE_PROJECT_NAME }}
       account_id: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
